@@ -106,6 +106,7 @@ import AssignItem from '../components/AssignItem.vue'
                 }
                 console.log("currentPerson", currentPerson);
                 localStorage.setItem('allEmployee', JSON.stringify(this.personInfos))
+                localStorage.setItem('personInfos', JSON.stringify(this.personInfos))
             }
         }
     }
