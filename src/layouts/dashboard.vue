@@ -77,7 +77,7 @@ export default {
     mounted () {
             let arr = localStorage.getItem('allProductDetails')
             this.allProductTypes = JSON.parse(arr) ? JSON.parse(arr) : [];
-            this.productNameAmount = JSON.parse(localStorage.getItem('personInfos'))
+            this.productNameAmount = JSON.parse(localStorage.getItem('allEmployee'))
             // this.allProductTypes = JSON.parse(allProductTypes) ? JSON.parse(allProductTypes) : [];
             // console.log(productNameAmount[index].device)
             // for (let i in this.productNameAmount) {
