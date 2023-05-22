@@ -37,7 +37,7 @@ export default {
 
     },
     mounted () {
-      console.log(this.counterValue);
+      // console.log(this.counterValue);
 
     },
 }

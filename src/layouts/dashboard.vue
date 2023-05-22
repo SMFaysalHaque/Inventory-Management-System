@@ -11,24 +11,19 @@
                                     <th class="border border-slate-300 bg-slate-100 w-1/12 py-2 text-center">Status</th>
                                     <th class="border border-slate-300 bg-slate-100 w-2/12 py-2 text-center">Serial</th>
                                     <th class="border border-slate-300 bg-slate-100 w-2/12 py-2 text-center">Type</th>
-                                    <th class="border border-slate-300 bg-slate-100 w-2/12 py-2 text-center">Name</th>
                                     <th class="border border-slate-300 bg-slate-100 w-3/12 py-2 text-center">Assign To</th>
                                 </tr>
                         </thead>
                         <tbody>
-                                <tr>
+                                <tr v-for="(itemEmployee, i) in allUnits" :key="itemEmployee.i">
                                     <td class="border border-slate-300 text-center py-3">Taken</td>
-                                    <td class="border border-slate-300 text-center py-3">01</td>
-                                    <td class="border border-slate-300 text-center py-3">Computer</td>
-                                    <td class="border border-slate-300 text-center py-3">hp-123</td>
-                                    <td class="border border-slate-300 text-center py-3">Akbar Ali</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 text-center py-3">Taken</td>
-                                    <td class="border border-slate-300 text-center py-3">02</td>
-                                    <td class="border border-slate-300 text-center py-3">Headphone</td>
-                                    <td class="border border-slate-300 text-center py-3">havit-2345</td>
-                                    <td class="border border-slate-300 text-center py-3">Rakib Ali</td>
+                                    <td class="border border-slate-300 text-center py-3">{{ i + 1 }}</td>
+                                    <td class="border border-slate-300 text-center py-3">
+                                        <div v-for="(value, key) in itemEmployee.device" :key="value">
+                                            {{ key + ":" + value}}
+                                        </div>
+                                    </td>
+                                    <td class="border border-slate-300 text-center py-3">{{ itemEmployee.name }}</td>
                                 </tr>
                         </tbody>
                     </table>
@@ -47,11 +42,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(signleProduct, i) in allProductTypes" :key="signleProduct.i">
+                                <tr v-for="(signleProduct, i) in allProductTypes" :key="i">
                                     <td class="border border-slate-300 text-center py-3">{{ signleProduct.type }}</td>
                                     <td class="border border-slate-300 text-center py-3">{{ signleProduct.quantity }}</td>
-                                    <td class="border border-slate-300 text-center py-3">10</td>
-                                    <td class="border border-slate-300 text-center py-3">01</td>
+                                    <td class="border border-slate-300 text-center py-3">{{ signleProduct.quantity  - signleProduct.taken}}</td>
+                                    <td class="border border-slate-300 text-center py-3">{{ signleProduct.taken }}</td>
                                 </tr>
                             </tbody>
                     </table>
@@ -71,32 +66,46 @@ export default {
     data() {
         return {
             // key: value
-            allProductTypes: []
+            allUnits: [],
+            allProductTypes: [],
+            // productsName: null,
         }
     },
     mounted () {
-            let arr = localStorage.getItem('allProductDetails')
-            this.allProductTypes = JSON.parse(arr) ? JSON.parse(arr) : [];
-            this.productNameAmount = JSON.parse(localStorage.getItem('allEmployee'))
+        let arr2 = localStorage.getItem('allEmployee')
+        this.allUnits = JSON.parse(arr2) ? JSON.parse(arr2) : [];
+
+        let arr = localStorage.getItem('allProductDetails')
+        this.allProductTypes = JSON.parse(arr) ? JSON.parse(arr) : [];
+        
+        // dash board calculation:
+        this.allUnits.forEach((el1) => {
+            for(const item in el1.device){
+                let tempIndex = this.allProductTypes.findIndex((el2) => el2.type === item)
+                if(!Number(this.allProductTypes[tempIndex].taken)){
+                    this.allProductTypes[tempIndex].taken = 0
+                }
+                this.allProductTypes[tempIndex].taken += el1.device[item]
+            }
+        })
+            // this.productNameAmount = JSON.parse(localStorage.getItem('allEmployee'))
+
+            
+            
+
             // this.allProductTypes = JSON.parse(allProductTypes) ? JSON.parse(allProductTypes) : [];
             // console.log(productNameAmount[index].device)
             // for (let i in this.productNameAmount) {
             //     const element = this.productNameAmount[i];
             //     console.log(element) 
             // }
+            // this.productsName = Object.keys(itemEmployee.device).map((item) => h('div', itemEmployee.device[item]))
             
 
         },
     methods: {
-        calculation() {
-            // console.log(this.productNameAmount)
-            for (let i = 0; i < this.productNameAmount.length; i++) {
-                const element = this.productNameAmount[i].device;
-                // console.log(Object.values(element))
-                console.log(element)
-                
-            }
-        }
+        
+
     },
 }
 </script>
