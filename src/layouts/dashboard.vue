@@ -42,11 +42,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(signleProduct, i) in allProductTypes" :key="i">
-                                    <td class="border border-slate-300 text-center py-3">{{ signleProduct.type }}</td>
-                                    <td class="border border-slate-300 text-center py-3">{{ signleProduct.quantity }}</td>
-                                    <td class="border border-slate-300 text-center py-3">{{ signleProduct.quantity  - signleProduct.taken}}</td>
-                                    <td class="border border-slate-300 text-center py-3">{{ signleProduct.taken }}</td>
+                                <tr v-for="(singleProduct, i) in allProductTypes" :key="i">
+                                    <td class="border border-slate-300 text-center py-3">{{ singleProduct.type }}</td>
+                                    <td class="border border-slate-300 text-center py-3">{{ singleProduct.quantity }}</td>
+                                    <td class="border border-slate-300 text-center py-3">{{ singleProduct.quantity  - singleProduct.taken}}</td>
+                                    <td class="border border-slate-300 text-center py-3">{{ singleProduct.taken }}</td>
                                 </tr>
                             </tbody>
                     </table>
