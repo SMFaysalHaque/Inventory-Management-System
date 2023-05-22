@@ -80,8 +80,11 @@ export default {
         
         // dash board calculation:
         this.allUnits.forEach((el1) => {
-            for(const item in el1.device){
+            // console.log("All Units in el1:", el1)
+            for(let item in el1.device){
+                console.log("Item from el1.device:", item)
                 let tempIndex = this.allProductTypes.findIndex((el2) => el2.type === item)
+                // console.log("Item from el2", el2)
                 if(!Number(this.allProductTypes[tempIndex].taken)){
                     this.allProductTypes[tempIndex].taken = 0
                 }

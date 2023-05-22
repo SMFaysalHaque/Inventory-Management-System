@@ -107,6 +107,9 @@ import AssignItem from '../components/AssignItem.vue'
                 if(!currentPerson.device[type]){
                     currentPerson.device[type] = 1;
                 }
+                // else{
+                //     currentPerson.device[type] = 
+                // }
                 console.log("currentPerson", currentPerson);
                 localStorage.setItem('allEmployee', JSON.stringify(this.personInfos))
 
